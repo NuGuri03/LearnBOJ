@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "command": "cmd /c \" cd ${fileDirname} && g++ ${fileBasename} -o program && program.exe && pause && exit 0\";",
+            "request": "launch",
+            "name": "C++"
+        }
+    ]
+}

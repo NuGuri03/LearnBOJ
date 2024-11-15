@@ -1,31 +1,31 @@
 #include <iostream>
-#include <vector>
+#include <climits>
 
-int max;
-int *continous_sum;
-
-void func(std::vector<int> v, int n) {
-    for (int i = n - 2; i >= 0; i--) {
-        if (continous_sum[i + 1] > 0)
-            continous_sum[i] += continous_sum[i + 1];
-        max = max < continous_sum[i] ? max = continous_sum[i] : max;  
+int n;
+int min = INT_MAX;
+void back_tracking(int cost[][3], int cnt, int sum, int selected) {
+    if (cnt == n) {
+        if (sum < min) {
+            min = sum;
+        }
+        return;
+    }
+    for (int i = 0; i < 3; i++) {
+        if (i == selected) continue;
+        sum += cost[cnt][i];
+        back_tracking(cost, cnt + 1, sum, i);
+        sum -= cost[cnt][i];
     }
 }
 
 int main() {
-    int n;
     std::cin >> n;
-
-    std::vector<int> inputs(n, 0);
-    continous_sum = new int[n];
+    int cost[1000][3];
 
     for (int i = 0; i < n; i++) {
-        std::cin >> inputs[i];
-        if (i == 0) max = inputs[i];
-        max = max < inputs[i] ? max = inputs[i] : max;
-        continous_sum[i] = inputs[i];
+        for (int j = 0; j < 3; j++) std::cin >> cost[i][j];
     }
-    
-    func(inputs, n);
-    std::cout << max << '\n';
+
+    back_tracking(cost, 0, 0, - 1);
+    std::cout << min << '\n';
 }

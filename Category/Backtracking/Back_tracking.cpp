@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-void DFS(std::vector<int>& vec, int arr[],bool visited[], int Cnt, int n, int m) {
+void BackTracking(std::vector<int>& vec, int arr[],bool visited[], int Cnt, int n, int m) {
     if (Cnt == m) {
         for (int i = 0; i < vec.size(); i++) {
             std::cout << vec[i] << ' '; 
@@ -13,7 +13,7 @@ void DFS(std::vector<int>& vec, int arr[],bool visited[], int Cnt, int n, int m)
         if (visited[i] == true) continue;
         visited[i] = true;
         vec.push_back(arr[i]);
-        DFS(vec, arr, visited, Cnt + 1, n, m);
+        BackTracking(vec, arr, visited, Cnt + 1, n, m);
         vec.pop_back();
         visited[i] = false;
     }
@@ -24,10 +24,10 @@ int main() {
     std::cin >> n >> m;
 
     std::vector<int> vec;
-    bool selected[n];
+    bool *selected = new bool[n];
     std::fill(selected, selected + n, false);
-    int arr[n];
+    int* arr = new int[n];
     for (int i = 1; i <= n; i++) arr[i - 1] = i;
 
-    DFS(vec, arr, selected, 0, n, m);
+    BackTracking(vec, arr, selected, 0, n, m);
 }

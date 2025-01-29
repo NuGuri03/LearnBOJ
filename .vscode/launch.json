@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "command": "cmd /c \"cd /d ${fileDirname} && g++ -std=c++23 -I${workspaceFolder}\\include ${file} -o ${workspaceFolder}\\build\\a && ${workspaceFolder}\\build\\a.exe & pause\"",
+            "request": "launch",
+            "name": "C++"
+        }
+    ]
+}

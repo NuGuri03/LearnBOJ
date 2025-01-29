@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "runner": "terminal",
+    "type": "shell",
+    "echoCommand": true,
+    "presentation": { "reveal": "always" },
+    "tasks": [
+        {
+            "label": "[C++] : Build with g++",
+            "command": "g++",
+            "args": [
+                "-std=c++23",
+                "-I",
+                "${workspaceFolder}\\include",
+                "${file}",
+                "-o",
+                "${workspaceFolder}\\build\\a.exe"
+            ],
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": {
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "[C++] : Execute with cmd",
+            "command": "cmd.exe",
+            "args": [
+                "/C",
+                "\"${workspaceFolder}\\build\\a.exe & pause\""
+            ],
+            "group": { "kind": "test", "isDefault": false }
+        }
+    ]
+}
